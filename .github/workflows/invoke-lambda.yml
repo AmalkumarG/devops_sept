@@ -1,0 +1,17 @@
+name: Invoke Lambda on Main Push
+
+on:
+  push:
+    branches:
+      - main   # only triggers on main branch
+
+jobs:
+  notify-lambda:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Lambda via API Gateway
+        run: |
+          curl -X POST https://gcg80gope9.execute-api.ap-south-1.amazonaws.com/default/sabka-pipe-test2 \
+          -H "Content-Type: application/json" \
+          -d '{"message": "Push to main branch"}'
+
